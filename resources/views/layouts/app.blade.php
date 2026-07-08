@@ -294,6 +294,16 @@
                 </li>
             @endif
 
+            @if (in_array(Auth::user()->role, ['Superadmin', 'Admin']))
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('penduduk.*') ? '' : 'collapsed' }}"
+                        href="{{ route('penduduk.index') }}">
+                        <i class='bx bx-user'></i>
+                        <span>Penduduk</span>
+                    </a>
+                </li>
+            @endif
+
             @if (Auth::user()->role == 'Superadmin')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}"
