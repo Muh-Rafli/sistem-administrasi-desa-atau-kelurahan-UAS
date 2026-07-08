@@ -21,11 +21,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        try {
-            $setting = Setting::first();
-            View::share('setting', $setting);
-        } catch (\Exception $e) {
-            // database tidak ditemukan
-        }
+        View::composer('*', function ($view) {
+            try {
+                $setting = Setting::first() ?? new Setting([
+                    'app_name' => 'NiceAdmin Laravel',
+                    'copyright' => 'Tamus Tahir | 2026',
+                    'login_title' => 'Halaman Login',
+                    'keywords' => 'admin, dashboard, laravel',
+                    'description' => 'NiceAdmin template',
+                ]);
+            } catch (\Exception $e) {
+                $setting = new Setting([
+                    'app_name' => 'NiceAdmin Laravel',
+                    'copyright' => 'Tamus Tahir | 2026',
+                    'login_title' => 'Halaman Login',
+                    'keywords' => 'admin, dashboard, laravel',
+                    'description' => 'NiceAdmin template',
+                ]);
+            }
+            $view->with('setting', $setting);
+        });
     }
 }

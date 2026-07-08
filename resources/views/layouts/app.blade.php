@@ -40,11 +40,11 @@
     <style>
         :root {
             /* ====== UBAH WARNA TEMA DI SINI ====== */
-            --theme-bg: #000080;
-            --theme-hover: #020260;
+            --theme-bg: #b91c1c;
+            --theme-hover: #991b1b;
             /* warna lebih gelap untuk efek hover */
             --theme-text: #ffffff;
-            --main-bg: #eeeeee;
+            --main-bg: #fafafa;
             /* warna background utama / halaman */
             /* ===================================== */
         }

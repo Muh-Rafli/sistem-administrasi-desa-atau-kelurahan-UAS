@@ -15,11 +15,44 @@ class DashboardController extends Controller
         $superadminCount = \App\Models\User::where('role', 'Superadmin')->count();
         $adminCount = \App\Models\User::where('role', 'Admin')->count();
 
+        $totalPenduduk = \App\Models\Penduduk::count();
+        $totalKK = \App\Models\KartuKeluarga::count();
+        $suratPendingCount = \App\Models\SuratKeterangan::where('status', 'Pending')->count();
+
+        $pendudukLaki = \App\Models\Penduduk::where('jenis_kelamin', 'L')->count();
+        $pendudukPerempuan = \App\Models\Penduduk::where('jenis_kelamin', 'P')->count();
+
+        // Pendidikan distribution
+        $pendidikanDistribution = \App\Models\Penduduk::selectRaw('pendidikan, count(*) as count')
+            ->groupBy('pendidikan')
+            ->pluck('count', 'pendidikan')
+            ->toArray();
+
+        // Pekerjaan distribution
+        $pekerjaanDistribution = \App\Models\Penduduk::selectRaw('pekerjaan, count(*) as count')
+            ->groupBy('pekerjaan')
+            ->pluck('count', 'pekerjaan')
+            ->toArray();
+
+        // Surat status distribution
+        $suratStatusCounts = \App\Models\SuratKeterangan::selectRaw('status, count(*) as count')
+            ->groupBy('status')
+            ->pluck('count', 'status')
+            ->toArray();
+
         return view('dashboard.index', [
             'title' => 'Dashboard',
             'totalUsers' => $totalUsers,
             'superadminCount' => $superadminCount,
             'adminCount' => $adminCount,
+            'totalPenduduk' => $totalPenduduk,
+            'totalKK' => $totalKK,
+            'suratPendingCount' => $suratPendingCount,
+            'pendudukLaki' => $pendudukLaki,
+            'pendudukPerempuan' => $pendudukPerempuan,
+            'pendidikanDistribution' => $pendidikanDistribution,
+            'pekerjaanDistribution' => $pekerjaanDistribution,
+            'suratStatusCounts' => $suratStatusCounts,
         ]);
     }
 

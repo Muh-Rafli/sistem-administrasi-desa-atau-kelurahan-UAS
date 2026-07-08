@@ -30,7 +30,77 @@
 
     <!-- Statistics Cards -->
     <div class="row g-4 mb-4">
-        <div class="col-md-4">
+        <!-- Total Penduduk -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <p class="text-muted mb-1 small">Total Penduduk</p>
+                            <h2 class="fw-bold mb-0">{{ $totalPenduduk }}</h2>
+                        </div>
+                        <div class="bg-primary bg-opacity-10 rounded-circle p-3">
+                            <i class='bx bx-group fs-2 text-primary'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-primary bg-opacity-10 border-0 py-2">
+                    <small class="text-primary fw-semibold">
+                        <i class='bx bx-check-double me-1'></i>
+                        Warga terdaftar
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Kartu Keluarga -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <p class="text-muted mb-1 small">Total KK</p>
+                            <h2 class="fw-bold mb-0">{{ $totalKK }}</h2>
+                        </div>
+                        <div class="bg-success bg-opacity-10 rounded-circle p-3">
+                            <i class='bx bx-id-card fs-2 text-success'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-success bg-opacity-10 border-0 py-2">
+                    <small class="text-success fw-semibold">
+                        <i class='bx bx-home-alt me-1'></i>
+                        Keluarga terdaftar
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Surat Menunggu Persetujuan -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <p class="text-muted mb-1 small">Surat Pending</p>
+                            <h2 class="fw-bold mb-0">{{ $suratPendingCount }}</h2>
+                        </div>
+                        <div class="bg-warning bg-opacity-10 rounded-circle p-3">
+                            <i class='bx bx-envelope fs-2 text-warning'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-warning bg-opacity-10 border-0 py-2">
+                    <small class="text-warning fw-semibold">
+                        <i class='bx bx-time-five me-1'></i>
+                        Perlu ditindaklanjuti
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Users -->
+        <div class="col-md-3">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body p-4">
                     <div class="d-flex align-items-center justify-content-between">
@@ -38,60 +108,81 @@
                             <p class="text-muted mb-1 small">Total Users</p>
                             <h2 class="fw-bold mb-0">{{ $totalUsers }}</h2>
                         </div>
-                        <div class="bg-primary bg-opacity-10 rounded-circle p-3">
-                            <i class='bx bx-user fs-2 text-primary'></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer bg-primary bg-opacity-10 border-0 py-2">
-                    <small class="text-primary fw-semibold">
-                        <i class='bx bx-trending-up me-1'></i>
-                        All registered users
-                    </small>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body p-4">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <p class="text-muted mb-1 small">Superadmin</p>
-                            <h2 class="fw-bold mb-0">{{ $superadminCount }}</h2>
-                        </div>
-                        <div class="bg-success bg-opacity-10 rounded-circle p-3">
-                            <i class='bx bx-shield fs-2 text-success'></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer bg-success bg-opacity-10 border-0 py-2">
-                    <small class="text-success fw-semibold">
-                        <i class='bx bx-check-circle me-1'></i>
-                        Full access users
-                    </small>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body p-4">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <p class="text-muted mb-1 small">Admin</p>
-                            <h2 class="fw-bold mb-0">{{ $adminCount }}</h2>
-                        </div>
                         <div class="bg-info bg-opacity-10 rounded-circle p-3">
-                            <i class='bx bx-user-check fs-2 text-info'></i>
+                            <i class='bx bx-user fs-2 text-info'></i>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer bg-info bg-opacity-10 border-0 py-2">
                     <small class="text-info fw-semibold">
-                        <i class='bx bx-user-circle me-1'></i>
-                        Standard access users
+                        <i class='bx bx-shield-quarter me-1'></i>
+                        Pengguna sistem
                     </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="row g-4 mb-4">
+        <!-- Gender Chart -->
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h6 class="m-0 fw-bold text-dark">
+                        <i class='bx bx-pie-chart-alt-2 me-2 text-primary'></i>
+                        Proporsi Jenis Kelamin
+                    </h6>
+                </div>
+                <div class="card-body p-4">
+                    <div id="genderChart"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Surat Status Chart -->
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h6 class="m-0 fw-bold text-dark">
+                        <i class='bx bx-envelope me-2 text-primary'></i>
+                        Status Layanan Persuratan
+                    </h6>
+                </div>
+                <div class="card-body p-4">
+                    <div id="suratChart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <!-- Pendidikan Chart -->
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h6 class="m-0 fw-bold text-dark">
+                        <i class='bx bx-book-reader me-2 text-primary'></i>
+                        Tingkat Pendidikan Penduduk
+                    </h6>
+                </div>
+                <div class="card-body p-4">
+                    <div id="pendidikanChart"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pekerjaan Chart -->
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h6 class="m-0 fw-bold text-dark">
+                        <i class='bx bx-briefcase me-2 text-primary'></i>
+                        Pekerjaan Penduduk
+                    </h6>
+                </div>
+                <div class="card-body p-4">
+                    <div id="pekerjaanChart"></div>
                 </div>
             </div>
         </div>
@@ -213,6 +304,147 @@
     @endpush
 
     @push('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Gender Chart (Donut)
+            const genderOptions = {
+                series: [{{ $pendudukLaki }}, {{ $pendudukPerempuan }}],
+                chart: {
+                    type: 'donut',
+                    height: 320,
+                    toolbar: {
+                        show: false
+                    }
+                },
+                labels: ['Laki-laki', 'Perempuan'],
+                colors: ['#000080', '#e20074'],
+                legend: {
+                    position: 'bottom'
+                },
+                dataLabels: {
+                    formatter(val, opts) {
+                        const name = opts.w.globals.labels[opts.seriesIndex]
+                        return [name, val.toFixed(1) + '%']
+                    }
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+            const genderChart = new ApexCharts(document.querySelector("#genderChart"), genderOptions);
+            genderChart.render();
+
+            // 2. Surat Chart (Pie)
+            const suratOptions = {
+                series: [
+                    {{ $suratStatusCounts['Pending'] ?? 0 }},
+                    {{ $suratStatusCounts['Diproses'] ?? 0 }},
+                    {{ $suratStatusCounts['Selesai'] ?? 0 }},
+                    {{ $suratStatusCounts['Ditolak'] ?? 0 }}
+                ],
+                chart: {
+                    type: 'pie',
+                    height: 320,
+                    toolbar: {
+                        show: false
+                    }
+                },
+                labels: ['Pending', 'Diproses', 'Selesai', 'Ditolak'],
+                colors: ['#f59e0b', '#3b82f6', '#10b981', '#ef4444'],
+                legend: {
+                    position: 'bottom'
+                }
+            };
+            const suratChart = new ApexCharts(document.querySelector("#suratChart"), suratOptions);
+            suratChart.render();
+
+            // 3. Pendidikan Chart (Horizontal Bar Chart)
+            const pendidikanOptions = {
+                series: [{
+                    name: 'Jumlah Penduduk',
+                    data: @json(array_values($pendidikanDistribution))
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 320,
+                    toolbar: {
+                        show: false
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 4,
+                        horizontal: true,
+                        barHeight: '50%'
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    style: {
+                        colors: ['#fff']
+                    }
+                },
+                xaxis: {
+                    categories: @json(array_keys($pendidikanDistribution)),
+                },
+                colors: ['#000080'],
+                grid: {
+                    borderColor: '#f1f1f1',
+                }
+            };
+            const pendidikanChart = new ApexCharts(document.querySelector("#pendidikanChart"), pendidikanOptions);
+            pendidikanChart.render();
+
+            // 4. Pekerjaan Chart (Vertical Bar/Column Chart)
+            const pekerjaanOptions = {
+                series: [{
+                    name: 'Jumlah Penduduk',
+                    data: @json(array_values($pekerjaanDistribution))
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 320,
+                    toolbar: {
+                        show: false
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 4,
+                        horizontal: false,
+                        columnWidth: '55%',
+                        endingShape: 'rounded'
+                    },
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                xaxis: {
+                    categories: @json(array_keys($pekerjaanDistribution)),
+                    labels: {
+                        rotate: -45,
+                        style: {
+                            fontSize: '10px'
+                        }
+                    }
+                },
+                colors: ['#3b82f6'],
+                grid: {
+                    borderColor: '#f1f1f1',
+                }
+            };
+            const pekerjaanChart = new ApexCharts(document.querySelector("#pekerjaanChart"), pekerjaanOptions);
+            pekerjaanChart.render();
+        });
+    </script>
     @endpush
 
 </x-app>
