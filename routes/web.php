@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\KartuKeluargaController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\TipeSuratController;
+use App\Http\Controllers\SuratKeteranganController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/kartu-keluarga', KartuKeluargaController::class)->middleware('role:Superadmin,Admin');
     Route::resource('/penduduk', PendudukController::class)->middleware('role:Superadmin,Admin');
     Route::resource('/tipe-surat', TipeSuratController::class)->middleware('role:Superadmin,Admin');
+    Route::get('/surat-keterangan/{surat_keterangan}/print', [SuratKeteranganController::class, 'print'])->name('surat-keterangan.print')->middleware('role:Superadmin,Admin');
+    Route::resource('/surat-keterangan', SuratKeteranganController::class)->middleware('role:Superadmin,Admin');
 
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::put('/setting/{setting}/update', [SettingController::class, 'update'])->name('setting.update');

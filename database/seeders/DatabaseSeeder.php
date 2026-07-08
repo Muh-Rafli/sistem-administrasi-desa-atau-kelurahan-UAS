@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             KartuKeluargaSeeder::class,
             PendudukSeeder::class,
             TipeSuratSeeder::class,
+            SuratKeteranganSeeder::class,
         ]);
     }
 }
