@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             KartuKeluargaSeeder::class,
             PendudukSeeder::class,
+            TipeSuratSeeder::class,
         ]);
     }
 }

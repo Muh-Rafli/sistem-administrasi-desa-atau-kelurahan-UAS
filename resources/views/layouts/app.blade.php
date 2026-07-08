@@ -304,6 +304,16 @@
                 </li>
             @endif
 
+            @if (in_array(Auth::user()->role, ['Superadmin', 'Admin']))
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('tipe-surat.*') ? '' : 'collapsed' }}"
+                        href="{{ route('tipe-surat.index') }}">
+                        <i class='bx bx-envelope'></i>
+                        <span>Tipe Surat</span>
+                    </a>
+                </li>
+            @endif
+
             @if (Auth::user()->role == 'Superadmin')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}"
