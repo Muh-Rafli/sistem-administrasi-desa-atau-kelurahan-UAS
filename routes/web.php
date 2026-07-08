@@ -9,6 +9,7 @@ use App\Http\Controllers\KartuKeluargaController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\TipeSuratController;
 use App\Http\Controllers\SuratKeteranganController;
+use App\Http\Controllers\PengumumanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,6 +35,17 @@ Route::middleware('auth')->group(function () {
     Route::resource('/tipe-surat', TipeSuratController::class)->middleware('role:Superadmin,Admin');
     Route::get('/surat-keterangan/{surat_keterangan}/print', [SuratKeteranganController::class, 'print'])->name('surat-keterangan.print')->middleware('role:Superadmin,Admin');
     Route::resource('/surat-keterangan', SuratKeteranganController::class)->middleware('role:Superadmin,Admin');
+
+    Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman.index');
+    Route::get('/pengumuman/{pengumuman}', [PengumumanController::class, 'show'])->name('pengumuman.show');
+
+    Route::middleware('role:Superadmin,Admin,Kades')->group(function () {
+        Route::get('/pengumuman/create', [PengumumanController::class, 'create'])->name('pengumuman.create');
+        Route::post('/pengumuman', [PengumumanController::class, 'store'])->name('pengumuman.store');
+        Route::get('/pengumuman/{pengumuman}/edit', [PengumumanController::class, 'edit'])->name('pengumuman.edit');
+        Route::put('/pengumuman/{pengumuman}', [PengumumanController::class, 'update'])->name('pengumuman.update');
+        Route::delete('/pengumuman/{pengumuman}', [PengumumanController::class, 'destroy'])->name('pengumuman.destroy');
+    });
 
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::put('/setting/{setting}/update', [SettingController::class, 'update'])->name('setting.update');

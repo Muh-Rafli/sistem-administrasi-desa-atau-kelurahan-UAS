@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             PendudukSeeder::class,
             TipeSuratSeeder::class,
             SuratKeteranganSeeder::class,
+            PengumumanSeeder::class,
         ]);
     }
 }

@@ -324,6 +324,14 @@
                 </li>
             @endif
 
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('pengumuman.*') ? '' : 'collapsed' }}"
+                    href="{{ route('pengumuman.index') }}">
+                    <i class='bx bx-bell'></i>
+                    <span>Pengumuman</span>
+                </a>
+            </li>
+
             @if (Auth::user()->role == 'Superadmin')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}"
