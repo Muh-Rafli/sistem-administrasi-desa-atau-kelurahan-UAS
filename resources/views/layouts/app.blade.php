@@ -284,6 +284,16 @@
                 </a>
             </li>
 
+            @if (in_array(Auth::user()->role, ['Superadmin', 'Admin']))
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('kartu-keluarga.*') ? '' : 'collapsed' }}"
+                        href="{{ route('kartu-keluarga.index') }}">
+                        <i class='bx bx-id-card'></i>
+                        <span>Kartu Keluarga</span>
+                    </a>
+                </li>
+            @endif
+
             @if (Auth::user()->role == 'Superadmin')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}"
