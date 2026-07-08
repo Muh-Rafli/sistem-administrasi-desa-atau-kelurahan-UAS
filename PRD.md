@@ -58,6 +58,10 @@ Database dirancang dengan pendekatan relasional (RDBMS) dengan beberapa entitas 
 4. **`tipe_surat`**: Tabel *master data* yang menyimpan format atau kategori surat yang disediakan desa.
 5. **`surat_keterangan`**: Tabel transaksional (history). Setiap baris merekam warga (dari tabel `penduduk`) yang mengajukan surat (dari tabel `tipe_surat`), serta mencatat nomor urut surat, tanggal, dan status proses.
 6. **`pengumuman`**: Entitas mandiri untuk konten publik, berelasi dengan `users` (sebagai penulis/author).
+7. **`mutasi_penduduk`**: Menyimpan riwayat perubahan status penduduk seperti kelahiran, kematian, pindah masuk, atau pindah keluar.
+8. **`pengaduan_warga`**: Menyimpan laporan, keluhan, atau aspirasi dari warga untuk kemudian diproses dan ditindaklanjuti oleh admin desa.
+9. **`program_bansos`**: Menyimpan daftar program bantuan sosial (misalnya BLT, PKH) beserta periode dan anggarannya.
+10. **`penerima_bansos`**: Tabel junction untuk mencatat penduduk yang terdaftar sebagai penerima bantuan sosial tertentu, beserta status dan tanggal penerimaan.
 
 ### 5.3 Visualisasi Entity Relationship Diagram (ERD)
 
@@ -127,12 +131,56 @@ erDiagram
         bigint author_id FK
     }
 
+    MUTASI_PENDUDUK {
+        bigint id PK
+        bigint penduduk_id FK
+        enum jenis_mutasi "Lahir, Mati, Masuk, Keluar"
+        date tanggal_mutasi
+        text keterangan
+        bigint author_id FK
+    }
+
+    PENGADUAN_WARGA {
+        bigint id PK
+        bigint pengadu_id FK
+        string judul
+        text isi_laporan
+        string file_lampiran
+        date tanggal_pengaduan
+        enum status "Pending, Diproses, Selesai, Ditolak"
+        text tanggapan
+        bigint processed_by FK
+    }
+
+    PROGRAM_BANSOS {
+        bigint id PK
+        string nama_program
+        text deskripsi
+        date tanggal_mulai
+        date tanggal_selesai
+        string sumber_dana
+    }
+
+    PENERIMA_BANSOS {
+        bigint id PK
+        bigint program_bansos_id FK
+        bigint penduduk_id FK
+        date tanggal_menerima
+        enum status_penerimaan "Pengajuan, Diverifikasi, Disetujui, Ditolak"
+    }
+
     %% Relasi
     USERS ||--o{ PENGUMUMAN : "menulis (author)"
     USERS ||--o{ SURAT_KETERANGAN : "memproses"
     KARTU_KELUARGA ||--|{ PENDUDUK : "memiliki anggota"
     PENDUDUK ||--o{ SURAT_KETERANGAN : "mengajukan"
     TIPE_SURAT ||--o{ SURAT_KETERANGAN : "mengkategorikan"
+    PENDUDUK ||--o{ MUTASI_PENDUDUK : "mengalami"
+    USERS ||--o{ MUTASI_PENDUDUK : "mencatat"
+    USERS ||--o{ PENGADUAN_WARGA : "mengajukan (pengadu)"
+    USERS ||--o{ PENGADUAN_WARGA : "menanggapi"
+    PROGRAM_BANSOS ||--|{ PENERIMA_BANSOS : "memiliki penerima"
+    PENDUDUK ||--o{ PENERIMA_BANSOS : "menerima"
 ```
 
 ## 6. Fase Rilis (Roadmap)
